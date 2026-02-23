@@ -17,7 +17,6 @@ export default function AuthForm() {
         email,
         password,
       });
-      
       if (isLogin) {
         login(data.access_token); 
       } else {

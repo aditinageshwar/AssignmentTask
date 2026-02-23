@@ -6,7 +6,9 @@ import { TasksModule } from './tasks/tasks.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true, 
+    }),
     MongooseModule.forRoot(process.env.MONGO_URI || 'mongodb://localhost:27017/taskportal'),
     AuthModule,
     TasksModule,

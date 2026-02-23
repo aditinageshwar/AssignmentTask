@@ -9,8 +9,10 @@ export default function Dashboard() {
   const [filter, setFilter] = useState('All');
 
   const fetchTasks = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
     try {
-      // The 'api' instance already adds the Bearer token from localStorage
       const res = await api.get(`/tasks?status=${filter === 'All' ? '' : filter}`);
       setTasks(res.data);
     } catch (err) {

@@ -20,25 +20,17 @@ let TasksController = class TasksController {
     constructor(tasksService) {
         this.tasksService = tasksService;
     }
-    create(createTaskDto, req) {
-        return this.tasksService.create(createTaskDto.title, createTaskDto.description, req.user.sub);
-    }
     findAll(status, req) {
-        return this.tasksService.findAll(req.user.sub, status);
+        return this.tasksService.findAll(req.user.userId, status);
+    }
+    create(createTaskDto, req) {
+        return this.tasksService.create(createTaskDto.title, createTaskDto.description, req.user.userId);
     }
     toggleStatus(id) {
         return this.tasksService.toggleStatus(id);
     }
 };
 exports.TasksController = TasksController;
-__decorate([
-    (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
-    __param(1, (0, common_1.Request)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
-    __metadata("design:returntype", void 0)
-], TasksController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
     __param(0, (0, common_1.Query)('status')),
@@ -47,6 +39,14 @@ __decorate([
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", void 0)
 ], TasksController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], TasksController.prototype, "create", null);
 __decorate([
     (0, common_1.Patch)(':id/toggle'),
     __param(0, (0, common_1.Param)('id')),
