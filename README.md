@@ -1,7 +1,9 @@
 📝 Full-Stack Task Management System
+
 A robust Task Management application built with the MERN stack (specifically NestJS for the backend and React/Vite for the frontend), featuring secure JWT authentication and MongoDB integration.
 
 🚀 Key Fixes Included
+
 Dependency Injection: Resolved the ConfigService resolution error in AuthModule.
 
 JWT Synchronization: Synchronized secret keys using registerAsync and ConfigService.
@@ -10,22 +12,9 @@ CORS Handling: Configured backend to allow Authorization headers from the React 
 
 Payload Mapping: Standardized sub to userId mapping between token signing and the JwtStrategy.
 
-Gemini said
-This README covers both the setup and the architectural fixes we implemented to handle the JWT authentication and dependency injection.
-
-📝 Full-Stack Task Management System
-A robust Task Management application built with the MERN stack (specifically NestJS for the backend and React/Vite for the frontend), featuring secure JWT authentication and MongoDB integration.
-
-🚀 Key Fixes Included
-Dependency Injection: Resolved the ConfigService resolution error in AuthModule.
-
-JWT Synchronization: Synchronized secret keys using registerAsync and ConfigService.
-
-CORS Handling: Configured backend to allow Authorization headers from the React frontend.
-
-Payload Mapping: Standardized sub to userId mapping between token signing and the JwtStrategy.
 
 🛠️ Tech Stack
+
 Backend:
 
 Framework: NestJS
