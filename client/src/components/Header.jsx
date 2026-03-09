@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Search, LogOut, LogIn, Bookmark } from 'lucide-react';
+import { Menu, X, Search, LogOut, LogIn, Bookmark, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useStore } from '../lib/store';
 import AuthModal from './AuthModal';
@@ -190,9 +190,6 @@ export default function Header() {
                   </>
                 )}
               </div>
-            </div>
-              )}
-            </div>
             </motion.div>
           )}
         </div>
@@ -201,8 +198,10 @@ export default function Header() {
       <AuthModal
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}
-        initialMode={authMode}
+        mode={authMode}
       />
     </>
+  );
+}
   );
 }

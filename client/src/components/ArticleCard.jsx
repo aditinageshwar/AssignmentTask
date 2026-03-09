@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Bookmark, BookmarkCheck, Clock, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Bookmark, BookmarkCheck, Clock } from 'lucide-react';
 import { useStore } from '../lib/store';
 import { bookmarksAPI } from '../lib/api';
 
@@ -20,76 +19,52 @@ const ArticleCard = ({ article, index }) => {
       await bookmarksAPI.toggle(article._id);
       toggleBookmark(article._id);
     } catch (error) {
-      console.error('Error toggling bookmark:', error);
+      console.error('[v0] Error toggling bookmark:', error);
     }
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
-      whileHover={{ y: -4 }}
-    >
+    <div>
       <Link to={`/article/${article._id}`} className="block group h-full">
-        <motion.div 
-          className="bg-card rounded-lg overflow-hidden h-full flex flex-col cursor-pointer border border-border/50 hover:border-primary/50 transition-colors"
-          whileHover={{ boxShadow: "0 15px 35px rgba(168, 85, 247, 0.15)" }}
-          transition={{ duration: 0.3 }}
+        <div 
+          className="bg-card rounded-lg overflow-hidden h-full flex flex-col cursor-pointer border border-border/50 hover:border-primary/50 transition-all hover:shadow-lg"
         >
           {/* Image Container */}
-          <motion.div 
+          <div 
             className="relative h-48 overflow-hidden bg-card flex-shrink-0"
-            whileHover={{ filter: "brightness(1.1)" }}
           >
-            <motion.img
+            <img
               src={article.imageUrl}
               alt={article.title}
-              className="w-full h-full object-cover"
-              whileHover={{ scale: 1.08 }}
-              transition={{ duration: 0.4 }}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
-            <motion.div 
-              className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" 
-              initial={{ opacity: 0.5 }}
-              whileHover={{ opacity: 0.3 }}
+            <div 
+              className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"
             />
             
             {/* Category Badge */}
-            <motion.div 
+            <div 
               className="absolute top-3 left-3"
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 + 0.2 }}
             >
-              <motion.span 
+              <span 
                 className="inline-block px-3 py-1 bg-primary/80 text-primary-foreground text-xs font-semibold rounded-full"
-                whileHover={{ backgroundColor: "hsl(var(--primary) / 1)" }}
               >
                 {article.category}
-              </motion.span>
-            </motion.div>
+              </span>
+            </div>
 
             {/* Bookmark Button */}
-            <motion.button
+            <button
               onClick={handleBookmarkToggle}
               className="absolute top-3 right-3 p-2 bg-background/80 hover:bg-background rounded-lg transition-smooth"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
             >
-              <motion.div
-                animate={isBookmarked ? { rotate: 360 } : {}}
-                transition={{ duration: 0.3 }}
-              >
-                {isBookmarked ? (
-                  <BookmarkCheck size={20} className="text-accent" />
-                ) : (
-                  <Bookmark size={20} className="text-muted-foreground hover:text-accent" />
-                )}
-              </motion.div>
-            </motion.button>
-          </motion.div>
+              {isBookmarked ? (
+                <BookmarkCheck size={20} className="text-accent" />
+              ) : (
+                <Bookmark size={20} className="text-muted-foreground hover:text-accent" />
+              )}
+            </button>
+          </div>
 
           {/* Content */}
           <div className="p-5 flex-1 flex flex-col">
@@ -110,9 +85,9 @@ const ArticleCard = ({ article, index }) => {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </Link>
-    </motion.div>
+    </div>
   );
 };
 
