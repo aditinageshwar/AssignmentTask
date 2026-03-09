@@ -34,18 +34,23 @@ export default function Header() {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-smooth">
               <motion.div 
-                className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center"
-                whileHover={{ rotate: 10, scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-1.5"
+                whileHover={{ scale: 1.05 }}
               >
-                <span className="text-white font-bold text-sm">N</span>
+                <motion.div 
+                  className="w-7 h-7 bg-gradient-to-br from-primary via-primary to-pink-500 rounded-full flex items-center justify-center"
+                  animate={{ boxShadow: ['0 0 20px rgba(168, 85, 247, 0.5)', '0 0 30px rgba(168, 85, 247, 0.8)', '0 0 20px rgba(168, 85, 247, 0.5)'] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <Zap size={16} className="text-white" />
+                </motion.div>
+                <motion.span 
+                  className="text-lg font-bold text-foreground hidden sm:inline"
+                  whileHover={{ letterSpacing: "0.05em" }}
+                >
+                  PulseNews<span className="text-primary">AI</span>
+                </motion.span>
               </motion.div>
-              <motion.span 
-                className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent hidden sm:inline"
-                whileHover={{ letterSpacing: "0.05em" }}
-              >
-                NewsHub
-              </motion.span>
             </Link>
 
             {/* Desktop Navigation */}

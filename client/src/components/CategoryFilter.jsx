@@ -28,43 +28,39 @@ export default function CategoryFilter() {
 
   return (
     <motion.div 
-      className="flex gap-2 overflow-x-auto pb-2"
+      className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide"
       variants={containerVariants}
       initial="hidden"
-      animate="visible"
+      whileInView="visible"
+      viewport={{ once: true }}
     >
       <motion.button
         onClick={() => setActiveCategory(null)}
         variants={itemVariants}
-        whileHover={{ scale: 1.05, boxShadow: "0 8px 20px rgba(var(--primary), 0.2)" }}
+        whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className={`px-4 py-2 glass-sm whitespace-nowrap transition-smooth ${
+        className={`px-4 py-2 rounded-lg whitespace-nowrap font-medium transition-all ${
           activeCategory === null
-            ? 'bg-primary text-primary-foreground glow'
-            : 'text-muted-foreground hover:text-foreground'
+            ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/40'
+            : 'bg-card border border-border/50 text-muted-foreground hover:text-foreground hover:border-primary/50'
         }`}
       >
         All
       </motion.button>
-      {categories.map((category, index) => (
+      {categories.map((category) => (
         <motion.button
           key={category}
           onClick={() => setActiveCategory(category)}
           variants={itemVariants}
-          whileHover={{ scale: 1.05, boxShadow: "0 8px 20px rgba(var(--primary), 0.2)" }}
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className={`px-4 py-2 glass-sm whitespace-nowrap transition-smooth ${
+          className={`px-4 py-2 rounded-lg whitespace-nowrap font-medium transition-all ${
             activeCategory === category
-              ? 'bg-primary text-primary-foreground glow'
-              : 'text-muted-foreground hover:text-foreground'
+              ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/40'
+              : 'bg-card border border-border/50 text-muted-foreground hover:text-foreground hover:border-primary/50'
           }`}
         >
-          <motion.span
-            animate={activeCategory === category ? { letterSpacing: "0.05em" } : {}}
-            transition={{ duration: 0.2 }}
-          >
-            {category}
-          </motion.span>
+          {category}
         </motion.button>
       ))}
     </motion.div>

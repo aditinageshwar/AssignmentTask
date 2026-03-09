@@ -26,7 +26,7 @@ export default function Footer() {
 
   return (
     <motion.footer 
-      className="border-t border-white/10 mt-20"
+      className="border-t border-border/30 mt-20 bg-background"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -38,22 +38,16 @@ export default function Footer() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8"
         >
           {/* Brand */}
           <motion.div variants={itemVariants}>
-            <motion.div 
-              className="flex items-center gap-2 mb-4"
-              whileHover={{ x: 5 }}
-            >
-              <motion.div 
-                className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center"
-                whileHover={{ rotate: 10 }}
-              >
-                <span className="text-white font-bold text-sm">N</span>
-              </motion.div>
-              <span className="text-lg font-bold">NewsHub</span>
-            </motion.div>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 bg-gradient-to-br from-primary to-pink-500 rounded-full flex items-center justify-center">
+                <span className="text-white font-bold text-sm">P</span>
+              </div>
+              <span className="text-lg font-bold">PulseNews<span className="text-primary">AI</span></span>
+            </div>
             <p className="text-sm text-muted-foreground">
               Your daily source for news and insights across technology, business, science, health, and entertainment.
             </p>

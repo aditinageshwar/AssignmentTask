@@ -1,6 +1,6 @@
-# NewsHub - MERN Stack News Application
+# PulseNews AI - AI-Powered News Platform
 
-A modern, animated news aggregation platform built with MongoDB, Express, React, and Node.js. Features a glassmorphic design with smooth animations using Framer Motion.
+A modern, AI-powered news aggregation platform built with MongoDB, Express, React, and Node.js. Features breaking news ticker, intelligent content curation, smooth animations, and a sleek purple-themed interface using Framer Motion.
 
 ## Project Architecture
 

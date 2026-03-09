@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
+import BreakingNewsTicker from './components/BreakingNewsTicker';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import ArticleDetail from './pages/ArticleDetail';
@@ -36,6 +37,7 @@ export default function App() {
   return (
     <Router>
       <div className="min-h-screen bg-background text-foreground flex flex-col">
+        <BreakingNewsTicker />
         <Header />
         <div className="flex-1">
           <AnimatePresence mode="wait">

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Bookmark, BookmarkCheck, Clock } from 'lucide-react';
+import { Bookmark, BookmarkCheck, Clock, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useStore } from '../lib/store';
 import { bookmarksAPI } from '../lib/api';
@@ -27,14 +27,15 @@ const ArticleCard = ({ article, index }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
-      whileHover={{ y: -5 }}
+      whileHover={{ y: -4 }}
     >
       <Link to={`/article/${article._id}`} className="block group h-full">
         <motion.div 
-          className="glass overflow-hidden h-full flex flex-col cursor-pointer"
-          whileHover={{ boxShadow: "0 20px 40px rgba(var(--primary), 0.2)" }}
+          className="bg-card rounded-lg overflow-hidden h-full flex flex-col cursor-pointer border border-border/50 hover:border-primary/50 transition-colors"
+          whileHover={{ boxShadow: "0 15px 35px rgba(168, 85, 247, 0.15)" }}
           transition={{ duration: 0.3 }}
         >
           {/* Image Container */}
@@ -91,38 +92,23 @@ const ArticleCard = ({ article, index }) => {
           </motion.div>
 
           {/* Content */}
-          <div className="p-4 flex-1 flex flex-col">
-            <motion.h3 
-              className="text-lg font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: index * 0.1 + 0.1 }}
-            >
+          <div className="p-5 flex-1 flex flex-col">
+            <h3 className="text-lg font-bold mb-3 line-clamp-2 group-hover:text-primary transition-colors">
               {article.title}
-            </motion.h3>
+            </h3>
             
-            <motion.p 
-              className="text-sm text-muted-foreground mb-4 line-clamp-2 flex-1"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: index * 0.1 + 0.15 }}
-            >
+            <p className="text-sm text-muted-foreground mb-4 line-clamp-2 flex-1">
               {article.description}
-            </motion.p>
+            </p>
 
             {/* Footer */}
-            <motion.div 
-              className="flex items-center justify-between text-xs text-muted-foreground pt-2 border-t border-white/5"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: index * 0.1 + 0.2 }}
-            >
-              <span>{article.author}</span>
+            <div className="flex items-center justify-between text-xs text-muted-foreground pt-3 border-t border-border/30">
+              <span className="font-medium">{article.author}</span>
               <div className="flex items-center gap-1">
                 <Clock size={14} />
                 <span>{article.readTime} min</span>
               </div>
-            </motion.div>
+            </div>
           </div>
         </motion.div>
       </Link>
