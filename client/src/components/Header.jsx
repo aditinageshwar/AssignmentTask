@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Search, LogOut, LogIn, Bookmark } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useStore } from '../lib/store';
 import AuthModal from './AuthModal';
 
@@ -22,17 +23,29 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 glass border-b">
+      <motion.header 
+        className="sticky top-0 z-50 glass border-b"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-smooth">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+              <motion.div 
+                className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center"
+                whileHover={{ rotate: 10, scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <span className="text-white font-bold text-sm">N</span>
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent hidden sm:inline">
+              </motion.div>
+              <motion.span 
+                className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent hidden sm:inline"
+                whileHover={{ letterSpacing: "0.05em" }}
+              >
                 NewsHub
-              </span>
+              </motion.span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -93,17 +106,29 @@ export default function Header() {
             </div>
 
             {/* Mobile Menu Button */}
-            <button
+            <motion.button
               onClick={() => setIsOpen(!isOpen)}
               className="md:hidden p-2 hover:bg-card/60 rounded-lg transition-smooth"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+              <motion.div
+                animate={{ rotate: isOpen ? 90 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {isOpen ? <X size={24} /> : <Menu size={24} />}
+              </motion.div>
+            </motion.button>
           </div>
 
           {/* Mobile Menu */}
           {isOpen && (
-            <div className="md:hidden pb-4 border-t border-white/10">
+            <motion.div 
+              className="md:hidden pb-4 border-t border-white/10"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
               <div className="mt-4 mb-4">
                 <div className="relative">
                   <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
@@ -161,9 +186,12 @@ export default function Header() {
                 )}
               </div>
             </div>
+              )}
+            </div>
+            </motion.div>
           )}
         </div>
-      </header>
+      </motion.header>
 
       <AuthModal
         isOpen={showAuthModal}

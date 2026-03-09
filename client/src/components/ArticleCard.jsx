@@ -28,59 +28,103 @@ const ArticleCard = ({ article, index }) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1 }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      whileHover={{ y: -5 }}
     >
-      <Link to={`/article/${article._id}`} className="block group">
-        <div className="glass overflow-hidden hover:shadow-lg hover:shadow-primary/30 transition-smooth">
+      <Link to={`/article/${article._id}`} className="block group h-full">
+        <motion.div 
+          className="glass overflow-hidden h-full flex flex-col cursor-pointer"
+          whileHover={{ boxShadow: "0 20px 40px rgba(var(--primary), 0.2)" }}
+          transition={{ duration: 0.3 }}
+        >
           {/* Image Container */}
-          <div className="relative h-48 overflow-hidden bg-card">
-            <img
+          <motion.div 
+            className="relative h-48 overflow-hidden bg-card flex-shrink-0"
+            whileHover={{ filter: "brightness(1.1)" }}
+          >
+            <motion.img
               src={article.imageUrl}
               alt={article.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              className="w-full h-full object-cover"
+              whileHover={{ scale: 1.08 }}
+              transition={{ duration: 0.4 }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" 
+              initial={{ opacity: 0.5 }}
+              whileHover={{ opacity: 0.3 }}
+            />
             
             {/* Category Badge */}
-            <div className="absolute top-3 left-3">
-              <span className="inline-block px-3 py-1 bg-primary/80 text-primary-foreground text-xs font-semibold rounded-full">
+            <motion.div 
+              className="absolute top-3 left-3"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 + 0.2 }}
+            >
+              <motion.span 
+                className="inline-block px-3 py-1 bg-primary/80 text-primary-foreground text-xs font-semibold rounded-full"
+                whileHover={{ backgroundColor: "hsl(var(--primary) / 1)" }}
+              >
                 {article.category}
-              </span>
-            </div>
+              </motion.span>
+            </motion.div>
 
             {/* Bookmark Button */}
-            <button
+            <motion.button
               onClick={handleBookmarkToggle}
               className="absolute top-3 right-3 p-2 bg-background/80 hover:bg-background rounded-lg transition-smooth"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {isBookmarked ? (
-                <BookmarkCheck size={20} className="text-accent" />
-              ) : (
-                <Bookmark size={20} className="text-muted-foreground hover:text-accent" />
-              )}
-            </button>
-          </div>
+              <motion.div
+                animate={isBookmarked ? { rotate: 360 } : {}}
+                transition={{ duration: 0.3 }}
+              >
+                {isBookmarked ? (
+                  <BookmarkCheck size={20} className="text-accent" />
+                ) : (
+                  <Bookmark size={20} className="text-muted-foreground hover:text-accent" />
+                )}
+              </motion.div>
+            </motion.button>
+          </motion.div>
 
           {/* Content */}
-          <div className="p-4">
-            <h3 className="text-lg font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+          <div className="p-4 flex-1 flex flex-col">
+            <motion.h3 
+              className="text-lg font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: index * 0.1 + 0.1 }}
+            >
               {article.title}
-            </h3>
+            </motion.h3>
             
-            <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+            <motion.p 
+              className="text-sm text-muted-foreground mb-4 line-clamp-2 flex-1"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: index * 0.1 + 0.15 }}
+            >
               {article.description}
-            </p>
+            </motion.p>
 
             {/* Footer */}
-            <div className="flex items-center justify-between text-xs text-muted-foreground">
+            <motion.div 
+              className="flex items-center justify-between text-xs text-muted-foreground pt-2 border-t border-white/5"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: index * 0.1 + 0.2 }}
+            >
               <span>{article.author}</span>
               <div className="flex items-center gap-1">
                 <Clock size={14} />
-                <span>{article.readTime} min read</span>
+                <span>{article.readTime} min</span>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </Link>
     </motion.div>
   );

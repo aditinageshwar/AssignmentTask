@@ -45,10 +45,24 @@ export default function ArticleDetail() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-background via-background to-card/20 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-muted-foreground">Loading article...</p>
-        </div>
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          <motion.div 
+            className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full mx-auto mb-4"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity }}
+          />
+          <motion.p 
+            className="text-muted-foreground"
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            Loading article...
+          </motion.p>
+        </motion.div>
       </div>
     );
   }
@@ -161,39 +175,53 @@ export default function ArticleDetail() {
 
         {/* Action Buttons */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
           className="glass-lg p-6 flex gap-4"
         >
-          <button
+          <motion.button
             onClick={handleBookmarkToggle}
             className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-smooth font-medium"
+            whileHover={{ scale: 1.02, boxShadow: "0 10px 30px rgba(var(--primary), 0.4)" }}
+            whileTap={{ scale: 0.98 }}
           >
-            {isBookmarked ? (
-              <>
-                <BookmarkCheck size={20} />
-                Bookmarked
-              </>
-            ) : (
-              <>
-                <Bookmark size={20} />
-                Bookmark
-              </>
-            )}
-          </button>
+            <motion.div
+              animate={isBookmarked ? { rotate: 360 } : {}}
+              transition={{ duration: 0.3 }}
+            >
+              {isBookmarked ? (
+                <>
+                  <BookmarkCheck size={20} />
+                  Bookmarked
+                </>
+              ) : (
+                <>
+                  <Bookmark size={20} />
+                  Bookmark
+                </>
+              )}
+            </motion.div>
+          </motion.button>
           
-          <button
+          <motion.button
             onClick={() => {
               const url = window.location.href;
               navigator.clipboard.writeText(url);
               alert('Link copied to clipboard!');
             }}
             className="flex-1 flex items-center justify-center gap-2 px-6 py-3 glass-sm hover:bg-card/60 transition-smooth font-medium"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
-            <Share2 size={20} />
+            <motion.div
+              animate={{ y: [0, -2, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <Share2 size={20} />
+            </motion.div>
             Share
-          </button>
+          </motion.button>
         </motion.div>
       </div>
     </main>

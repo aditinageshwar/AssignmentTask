@@ -56,14 +56,83 @@
   }
 
   .glow {
-    @apply shadow-lg;
+    @apply shadow-lg shadow-primary/20;
   }
 
   .glow-accent {
-    @apply shadow-lg;
+    @apply shadow-lg shadow-accent/20;
   }
 
   .transition-smooth {
     @apply transition-all duration-300 ease-out;
+  }
+
+  /* Advanced animations */
+  @keyframes shimmer {
+    0%, 100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      transform: translateY(10px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(var(--primary), 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(var(--primary), 0.6);
+    }
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .shimmer-animation {
+    animation: shimmer 2s infinite;
+  }
+
+  .slide-up-animation {
+    animation: slide-up 0.6s ease-out;
+  }
+
+  .float-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .pulse-glow-animation {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .gradient-shift-animation {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
   }
 }
